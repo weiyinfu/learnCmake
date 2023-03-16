@@ -1,0 +1,22 @@
+D:\src\fibo> cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=D:\src\vcpkg\scripts\buildsystems\vcpkg.cmake
+-- Building for: Visual Studio 16 2019
+-- Selecting Windows SDK version 10.0.18362.0 to target Windows 10.0.19041.
+-- The CXX compiler identification is MSVC 19.27.29111.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.27.29110/bin/Hostx64/x64/cl.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/src/fibo/build
+D:\src\fibo> cmake --build build
+Microsoft (R) Build Engine version 16.7.0+b89cb5fde for .NET Framework
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Checking Build System
+  Building Custom Rule D:/src/fibo/CMakeLists.txt
+  main.cxx
+  The contents of <span> are available only with C++20 or later.
+  fibo.vcxproj -> D:\src\fibo\build\Debug\fibo.exe
+  Building Custom Rule D:/src/fibo/CMakeLists.txt

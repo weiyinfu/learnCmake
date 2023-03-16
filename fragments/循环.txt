@@ -1,0 +1,5 @@
+while(condition)
+  COMMAND1(ARGS ...)
+  COMMAND2(ARGS ...)
+  ...
+endwhile(condition)

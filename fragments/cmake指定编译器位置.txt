@@ -1,0 +1,27 @@
+cmake指定编译器位置
+# 方法一：设置CC和CXX环境变量
+export CC=gcc-4.2
+export CXX=/usr/bin/g++-4.2
+
+# 方法二：使用-D指定环境变量
+cmake -D CMAKE_C_COMPILER=gcc CMAKE_CXX_COMPILER=g++ /path/to/your/source
+
+# 方法三：在CMakeLists.txt中指定环境变量
+使用set()在CMakeLists.txt 文件中设置CMAKE_FOO_COMPILER 变量值为有效的编译器名称或者全路径。这种方式有一个注意事项：必须把set语句放在最前面。
+例如：
+cmake_minimum_required(VERSION 3.5.0)
+set(CMAKE_C_COMPILER "gcc")
+set(CMAKE_CXX_COMPILER "/usr/bin/g++")
+project(clusterkit4cpp)
+如果把这两个set语句放在project语句下面是不管用的。
+
+
+
+指定编译器的选项：
+
+set(CMAKE_CXX_COMPILER "clang++" ) # 显示指定使用的C++编译器
+set(CMAKE_CXX_FLAGS "-std=c++11") # c++11
+set(CMAKE_CXX_FLAGS "-g") # 调试信息
+set(CMAKE_CXX_FLAGS "-Wall") # 开启所有警告
+set(CMAKE_CXX_FLAGS_DEBUG "-O0" ) # 调试包不优化
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG " ) # release包优化

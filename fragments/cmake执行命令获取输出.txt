@@ -1,0 +1,25 @@
+cmake执行命令获取输出
+
+if (NOT DISABLE_PYTHON)
+    if (APPLE)
+        # workaround
+        # https://github.com/Homebrew/legacy-homebrew/issues/25118
+        # https://cmake.org/Bug/view.php?id=14809
+        # 通过find_program，获取python3-config这个命令所在的具体路径
+        find_program(PYTHON_CONFIG_EXECUTABLE python3-config)
+        message("-- Found python3-config: ${PYTHON_CONFIG_EXECUTABLE}")
+        execute_process(COMMAND ${PYTHON_CONFIG_EXECUTABLE} --prefix OUTPUT_VARIABLE PYTHON_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+        message("-- Discovered Python 3.x prefix: ${PYTHON_PREFIX}")
+        set(PYTHON_EXECUTABLE "${PYTHON_PREFIX}/bin/python3")
+    endif ()
+    find_package(PythonInterp 3 REQUIRED)
+    find_package(PythonLibs 3 REQUIRED)
+    if (NOT NUMPY_INCLUDES)
+        execute_process(COMMAND ${PYTHON_EXECUTABLE} -c "import numpy; print(numpy.get_include())" OUTPUT_VARIABLE NUMPY_INCLUDES)
+    endif ()
+endif ()
+- find_program(PYTHON_CONFIG_EXECUTABLE python3-config)
+- 这句话把python3-config这个exe的绝对路径赋值给了PYTHON_CONFIG_EXECUTABLE这个变量
+- execute_process(COMMAND ${PYTHON_CONFIG_EXECUTABLE} --prefix OUTPUT_VARIABLE PYTHON_PREFIX OUTPUT_STRIP_TRAILING_WHITESPACE)
+- 执行命令，COMMAND参数后面跟命令的绝对路径，--prefix表示命令的参数，OUTPUT_VARIABLE表示把此命令的输出打印到PYTHON_PREFIX，最后一句OUTPUT_STRIP_TRAILING_WHITESPACE表示把输出去掉左右空白
+- python -c "import numpy; print(numpy.get_include())"这个命令可以执行一段python代码。有了python，则awk、sed之类的命令可以休矣。

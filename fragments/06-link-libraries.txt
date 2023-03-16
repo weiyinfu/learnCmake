@@ -1,0 +1,19 @@
+
+# 直接是全路径
+link_libraries(“/home/server/third/lib/libcommon.a”)
+# 下面的例子，只有库名，cmake会自动去所包含的目录搜索
+link_libraries(iconv)# 传入变量link_libraries(${RUNTIME_LIB})
+# 也可以链接多个
+link_libraries("/opt/MATLAB/R2012a/bin/glnxa64/libeng.so"　"/opt/MATLAB/R2012a/bin/glnxa64/libmx.so")
+
+为特定的target指定link_libraries，库名有多种写法
+
+# 以下写法都可以：
+target_link_libraries(myProject comm)       # 连接libhello.so库，默认优先链接动态库
+target_link_libraries(myProject libcomm.a)  # 显示指定链接静态库
+target_link_libraries(myProject libcomm.so) # 显示指定链接动态库
+
+# 再如：
+target_link_libraries(myProject libcomm.so)　　#这些库名写法都可以。
+target_link_libraries(myProject comm)
+target_link_libraries(myProject -lcomm)

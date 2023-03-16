@@ -1,0 +1,39 @@
+cmake_minimum_required (VERSION 2.6)
+# 添加头文件路径
+INCLUDE_DIRECTORIES(../../thirdparty/comm)
+
+# 查找库所在的路径
+FIND_LIBRARY(COMM_LIB comm ../../thirdparty/comm/lib NO_DEFAULT_PATH)
+FIND_LIBRARY(RUNTIME_LIB rt /usr/lib  /usr/local/lib NO_DEFAULT_PATH)
+
+# 需要链接的库的名称
+link_libraries(${COMM_LIB} ${RUNTIME_LIB})
+
+# 给g++添加额外的参数
+ADD_DEFINITIONS(
+-O3 -g -W -Wall
+ -Wunused-variable -Wunused-parameter -Wunused-function -Wunused
+ -Wno-deprecated -Woverloaded-virtual -Wwrite-strings
+ -D__WUR= -D_REENTRANT -D_FILE_OFFSET_BITS=64 -DTIXML_USE_STL
+)
+
+# 创建一个名为lib_demo的静态库
+add_library(lib_demo
+        cmd.cpp
+        global.cpp
+        md5.cpp
+)
+# 创建一个名为lib_demo2的动态库
+add_library(lib_demo2 SHARED
+        cmd.cpp
+        global.cpp
+        md5.cpp
+)
+# 全局需要链接的库的名称
+link_libraries(lib_demo)
+
+# 创建动态链接库
+add_executable(demo main.cpp)
+
+# link library in static mode，为特定的目标添加link_libraries
+target_link_libraries(demo libuuid.a)

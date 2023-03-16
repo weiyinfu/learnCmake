@@ -1,0 +1,5 @@
+add_sub_directory(protobufDirectory)
+include(myModule.cmake)
+
+macro和function是一对，前者是复制粘贴，后者是真正运行。
+include和add_sub_directory是一对，前者是复制粘贴，后者是真正运行。

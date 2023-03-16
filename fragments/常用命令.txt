@@ -1,0 +1,33 @@
+add_library：编译生成库
+add_execute：编译生成可执行文件
+include_directories:指定include的文件名称
+link_directories：指定要链接的库文件路径。
+target_link_libraries：生成目标文件的时候将target与libraries进行链接。
+
+
+# 添加头文件目录INCLUDE_DIRECTORIES
+
+语法：include_directories([AFTER|BEFORE] [SYSTEM] dir1 [dir2 ...])
+它相当于g++选项中的-I参数的作用，也相当于环境变量中增加路径到CPLUS_INCLUDE_PATH变量的作用。
+
+include_directories(../../../thirdparty/comm/include)
+
+
+# 添加需要链接的库文件目录LINK_DIRECTORIES
+
+语法：link_directories(directory1 directory2 ...)
+它相当于g++命令的-L选项的作用，也相当于环境变量中增加LD_LIBRARY_PATH的路径的作用。
+link_directories("/home/server/third/lib")
+
+# EXECUTABLE_OUTPUT_PATH和LIBRARY_OUTPUT_PATH
+我们可以通过 SET 指令重新定义 EXECUTABLE_OUTPUT_PATH 和 LIBRARY_OUTPUT_PATH 变量来指定最终的目标二进制的位置(指最终生成的CRNode可执行文件或者最终的共享库，而不包含编译生成的中间文件)。命令如下：
+
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
+
+
+TARGET_LINK_LIBRARIES命令
+
+TARGET_LINK_LIBRARIES(CRNode log4cpp thrift)
+这句话指定在链接目标文件的时候需要链接的外部库，其效果类似gcc的编译参数“-l”，可以解决外部库的依赖问题。
+

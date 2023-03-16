@@ -1,0 +1,11 @@
+注意：cmake的语法支持大小、小写和大小写混合，也就是说cmake是不区分大小写的。
+
+
+cmake_minimum_required(VERSION 3.0)
+project(test)
+# 查找包，在查找包的过程中会设置一些路径
+find_package(unofficial-sqlite3 CONFIG REQUIRED)
+# 添加可执行文件
+add_executable(main main.cpp)
+//为可执行文件指明链接过程中需要查找的库
+target_link_libraries(main PRIVATE unofficial::sqlite3::sqlite3)

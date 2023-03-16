@@ -1,0 +1,6 @@
+project中可以定义项目相关信息
+project(<PROJECT-NAME>
+ [VERSION <major>[.<minor>[.<patch>[.<tweak>]]]]
+ [DESCRIPTION <project-description-string>]
+ [HOMEPAGE_URL <url-string>]
+ [LANGUAGES <language-name>...])

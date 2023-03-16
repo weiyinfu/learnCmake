@@ -1,0 +1,24 @@
+macro形式如下：
+macro(<name> [arg1 [arg2 [arg3 ...]]])
+  COMMAND1(ARGS ...)
+  COMMAND2(ARGS ...)
+  ...
+endmacro(<name>)
+
+
+function形式如下：
+function(<name> [arg1 [arg2 [arg3 ...]]])
+  COMMAND1(ARGS ...)
+  COMMAND2(ARGS ...)
+  ...
+function(<name>)
+
+定义一个名称为name的宏（函数），arg1...是传入的参数。我们除了可以用${arg1}来引用变量以外，系统为我们提供了一些特殊的变量：
+* ARGV#
+#是一个下标，0指向第一个参数，累加
+* ARGV
+所有的定义时要求传入的参数
+* ARGN
+定义时要求传入的参数以外的参数，比如定义宏（函数）时，要求输入1个，书记输入了3个，则剩下的两个会以数组形式存储在ARGN中
+* ARGC
+传入的实际参数的个数，也就是调用函数是传入的参数个数

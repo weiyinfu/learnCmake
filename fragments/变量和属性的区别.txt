@@ -1,0 +1,16 @@
+cmake variables列表：
+https://cmake.org/cmake/help/latest/manual/cmake-variables.7.html
+
+add_executable(foo foo.cpp)
+set_target_properties(foo PROPERTIES
+    CXX_STANDARD 14
+    CXX_EXTENSIONS OFF
+)
+# Build foo with c++11 for some reason
+add_executable(foo11 foo.cpp)
+set_target_properties(foo11 PROPERTIES
+    CXX_STANDARD 11
+    CXX_EXTENSIONS OFF
+)
+
+如上，可以为target和lib分别设置cpp的版本号。这叫做properties，也就是目标产物的属性。同样，cmake也可以设置全局变量，它的作用范围是全局。

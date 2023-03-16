@@ -1,0 +1,49 @@
+INSTALL命令
+在执行INSTALL命令的时候需要注意CMAKE_INSTALL_PREFIX参数的值。其命令形式如下：
+
+INSTALL(TARGETS targets...
+ 	[[ARCHIVE|LIBRARY|RUNTIME]
+ 	[DESTINATION < dir >]
+ 	[PERMISSIONS permissions...]
+ 	[CONFIGURATIONS 	[Debug|Release|...]]
+ 	[COMPONENT < component >]
+ 	[OPTIONAL] 	] [...])
+参数中的 TARGETS 后面跟的就是我们通过 ADD_EXECUTABLE 或者 ADD_LIBRARY 定义的目标文件,可能是可执行二进制、动态库、静态库。DESTINATION 定义了安装的路径,如果路径以/开头,那么指的是绝对路径,这时候CMAKE_INSTALL_PREFIX 其实就无效了。如果你希望使用 CMAKE_INSTALL_PREFIX 来定义安装路径,就要写成相对路径,即不要以/开头,那么安装后的路径就是${CMAKE_INSTALL_PREFIX} /< destination 定义的路径>
+你不需要关心 TARGETS 具体生成的路径,只需要写上 TARGETS 名称就可以了。
+非目标文件的可执行程序安装(比如脚本之类):
+
+INSTALL(PROGRAMS files... DESTINATION < dir >
+ 	[PERMISSIONS permissions...]
+ 	[CONFIGURATIONS [Debug|Release|...]]
+ 	[COMPONENT < component >]
+ 	[RENAME < name >] [OPTIONAL])
+跟上面的 FILES 指令使用方法一样,唯一的不同是安装后权限为OWNER_EXECUTE, GROUP_EXECUTE, 和 WORLD_EXECUTE,即 755 权限目录的安装。
+安装一个目录的命令如下：
+
+INSTALL(DIRECTORY dirs... DESTINATION < dir >
+ 	[FILE_PERMISSIONS permissions...]
+ 	[DIRECTORY_PERMISSIONS permissions...]
+ 	[USE_SOURCE_PERMISSIONS]
+ 	[CONFIGURATIONS [Debug|Release|...]]
+ 	[COMPONENT < component >]
+ 	[[PATTERN < pattern > | REGEX < regex >]
+ 	[EXCLUDE] [PERMISSIONS permissions...]] [...])
+DIRECTORY 后面连接的是所在 Source 目录的相对路径,但务必注意:abc 和 abc/有很大的区别。如果目录名不以/结尾,那么这个目录将被安装为目标路径下的 abc,如果目录名以/结尾,代表将这个目录中的内容安装到目标路径,但不包括这个目录本身。
+
+install(TARGETS MyLib
+        EXPORT MyLibTargets
+        LIBRARY DESTINATION lib  # 动态库安装路径
+        ARCHIVE DESTINATION lib  # 静态库安装路径
+        RUNTIME DESTINATION bin  # 可执行文件安装路径
+        PUBLIC_HEADER DESTINATION include  # 头文件安装路径
+        )
+LIBRARY, ARCHIVE, RUNTIME, PUBLIC_HEADER是可选的，可以根据需要进行选择。 DESTINATION后面的路径可以自行制定，根目录默认为CMAKE_INSTALL_PREFIX,可以试用set方法进行指定，如果使用默认值的话，Unix系统的默认值为 /usr/local, Windows的默认值为 c:/Program Files/${PROJECT_NAME}。比如字linux系统下若LIBRARY的安装路径指定为lib,即为/usr/local/lib。所以要安装mymath mymathapp我们可以这样写
+
+# 将库文件，可执行文件，头文件安装到指定目录
+install(TARGETS mymath mymathapp
+        EXPORT MyMathTargets
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin
+        PUBLIC_HEADER DESTINATION include
+        )

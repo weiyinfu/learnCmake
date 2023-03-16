@@ -1,0 +1,25 @@
+cmake的内置变量:https://cmake.org/cmake/help/latest/manual/cmake-properties.7.html
+
+# 使用set命令设置一些环境变量
+set (Tutorial_VERSION_MAJOR 1)
+set (Tutorial_VERSION_MINOR 0)
+
+# 使用message命令打印信息
+message(STATUS ${PROJECT_NAME})
+message(STATUS ${PROJECT_SOURCE_DIR})
+message(STATUS ${PROJECT_BINARY_DIR})
+message(STATUS ${Tutorial_SOURCE_DIR})
+message(STATUS ${Tutorial_BINARY_DIR})
+
+
+message命令支持的消息类型
+* (none)：Important information
+* STATUS：Incidental information
+* WARNING：CMake Warning, continue processing
+* AUTHOR_WARNING：CMake Warning (dev), continue processing
+* SEND_ERROR：CMake Error, continue processing,but skip generation
+* FATAL_ERROR：CMake Error, stop processing and generation
+* DEPRECATION：CMake Deprecation Error or Warning if variable CMAKE_ERROR_DEPRECATED or CMAKE_WARN_DEPRECATED is enabled, respectively, else no message.
+
+
+除了使用set，也可以在命令行中使用-D参数。

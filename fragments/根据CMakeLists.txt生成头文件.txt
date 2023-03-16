@@ -1,0 +1,20 @@
+有时候需要通过CMakeLists向源文件传递一些信息，这时候可以使用.h.in文件。
+
+在CMakeLists.txt中添加configure_file命令，此命令接受src、des两个参数，src表示输入文件，des表示输出文件。
+
+set (Tutorial_VERSION_MAJOR 1)
+set (Tutorial_VERSION_MINOR 0)
+configure_file (
+  "${PROJECT_SOURCE_DIR}/TutorialConfig.h.in"
+  "${PROJECT_BINARY_DIR}/TutorialConfig.h"
+  )
+option (USE_MYMATH   "Use tutorial provided math implementation" ON)
+
+TutorialConfig.h.in中的内容可以是
+
+// the configured options and settings for Tutorial
+#define Tutorial_VERSION_MAJOR @Tutorial_VERSION_MAJOR@
+#define Tutorial_VERSION_MINOR @Tutorial_VERSION_MINOR@
+#cmakedefine USE_MYMATH
+
+也就是说，xx.h.in文件可以用于借助CMAKE中的set的变量生成头文件。

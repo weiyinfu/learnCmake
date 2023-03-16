@@ -1,0 +1,4 @@
+file是一个cmake的函数，第一个参数表示使用file的哪一个功能，第二个参数表示变量的名称，把执行结果放在这个变量里面，第三个参数是文件的通配符。
+
+file(GLOB_RECURSE native_srcs src/main/cpp/*.cpp)
+add_library(HaAlgorithm SHARED ${native_srcs})

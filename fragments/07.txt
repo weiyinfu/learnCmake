@@ -1,0 +1,13 @@
+find_package(CURL)
+add_executable(curltest curltest.cc)
+if(CURL_FOUND)
+    target_include_directories(clib PRIVATE ${CURL_INCLUDE_DIR})
+    target_link_libraries(curltest ${CURL_LIBRARY})
+else(CURL_FOUND)
+    message(FATAL_ERROR ”CURL library not found”)
+endif(CURL_FOUND)
+
+如果find_package执行成功，它会设置如下几个变量：
+* xxx_FOUND
+* xxx_LIBRARIES
+* xxx_INCLUDE_DIRS
