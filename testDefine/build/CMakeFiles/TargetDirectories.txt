@@ -1,3 +1,0 @@
-/Users/bytedance/Desktop/mypy3/learnVcpkgCmake/learnCmake/testDefine/build/CMakeFiles/main.dir
-/Users/bytedance/Desktop/mypy3/learnVcpkgCmake/learnCmake/testDefine/build/CMakeFiles/edit_cache.dir
-/Users/bytedance/Desktop/mypy3/learnVcpkgCmake/learnCmake/testDefine/build/CMakeFiles/rebuild_cache.dir

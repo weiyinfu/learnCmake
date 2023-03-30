@@ -1,0 +1,8 @@
+message("这是一条默认消息")
+message(STATUS "这是一条Status 消息")
+message(DEBUG "这是一条Debug消息")
+message(WARNING "这是一条Warning消息")
+message(ERROR "这是一条Error消息")
+message(DEPRECATION "这是一条DEPRECATION消息")
+message(NOTICE "这是一条NOTICE消息")
+message(VERBOSE "这是一条VERBOSE消息")
